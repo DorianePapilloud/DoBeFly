@@ -10,7 +10,6 @@ namespace DoBeFly
     [Table("Pilot")]
     public class Pilot : Employee
     {
-
         public int PilotId { get; set; }
         public DateTime FlightHours { get; set; }
         public string FlightSchool { get; set; }
