@@ -9,8 +9,7 @@ namespace DoBeFly
 {
     [Table("Employee")]
     public class Employee : Person
-    {
-
+    {  
         public string PassportNumber { get; set; }
         public double Salary { get; set; }
         public DateTime HireDate { get; set; }

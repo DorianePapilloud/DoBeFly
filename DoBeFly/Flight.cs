@@ -26,7 +26,7 @@ namespace DoBeFly
         public Boolean NonSmokingFlight { get; set; }
         public int PilotId { get; set; }
         public double Price { get; set; }
-        public string Seats { get; set; }
+        public int Seats { get; set; }
         public Boolean Strikebound { get; set; }
         public DateTime Timestamp { get; set; }
         public string Utilization { get; set; }
