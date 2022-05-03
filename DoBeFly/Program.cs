@@ -26,9 +26,9 @@ namespace DoBeFly
             //Create flights and add them into the dbSet
             Flight f1 = new Flight() { Seats = 100, Destination = "BoraBora" };
             Flight f2 = new Flight() { Seats = 200, Destination = "Ireland" };
-            context.Flightset.Add(f1);
+            context.FlightSet.Add(f1);
             Console.WriteLine("Flight to " + f1.Destination + " added");
-            context.Flightset.Add(f2);
+            context.FlightSet.Add(f2);
             Console.WriteLine("Flight to " + f2.Destination + " added");
 
 
@@ -58,14 +58,14 @@ namespace DoBeFly
 
 
             //For each to print all the flights of the database
-            foreach (Flight f in context.Flightset)
+            foreach (Flight f in context.FlightSet)
                 Console.WriteLine("Date: {0}, Destination: {1}, Seats: {2}", f.Date, f.Destination, f.Seats);
 
             //Get a flight
-            var FlightsToBoraBora = context.Flightset.Where(f => f.Destination == "BoraBora").ToList<Flight>();
+            var FlightsToBoraBora = context.FlightSet.Where(f => f.Destination == "BoraBora").ToList<Flight>();
             Console.WriteLine(FlightsToBoraBora.ToString());
             //Or          
-            var FlightsToBoraBoraTwo = from Flight in context.Flightset
+            var FlightsToBoraBoraTwo = from Flight in context.FlightSet
                                        where Flight.Destination == "BoraBora" && Flight.Seats > 0
                                        select Flight;
 
