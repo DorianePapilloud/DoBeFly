@@ -10,9 +10,10 @@ namespace DoBeFly
     [Table("Passenger")]
     public class Passenger : Person
     {
-
         public int PassengerId { get; set; }
+     
         public DateTime CustomerSince { get; set; }
+        
         public string Status { get; set; }
 
     }

@@ -11,8 +11,11 @@ namespace DoBeFly
     public class Pilot : Employee
     {
         public int PilotId { get; set; }
+
         public DateTime FlightHours { get; set; }
+
         public string FlightSchool { get; set; }
+        
         public DateTime LicenseDate { get; set; }
 
 

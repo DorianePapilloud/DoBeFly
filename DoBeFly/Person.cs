@@ -10,12 +10,16 @@ namespace DoBeFly
     [Table("Person")]
     public class Person
     {
-
         public DateTime Birthday { get; set; }
+     
         public string EMail { get; set; }
+        
         public string FullName { get; set; }
+        
         public string GivenName { get; set; }
+        
         public int PersonId { get; set; }
+        
         public string Surname { get; set; }
 
     }
