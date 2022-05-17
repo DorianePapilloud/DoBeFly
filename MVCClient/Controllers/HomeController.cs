@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using MVCClient.Models;
+using MVCClient.Services;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -12,15 +13,18 @@ namespace MVCClient.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+        private readonly IDoBeFlyServices _dobeFly;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ILogger<HomeController> logger, IDoBeFlyServices dobeFly)
         {
             _logger = logger;
+            _dobeFly = dobeFly;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            return View();
+            var listFlights = await _dobeFly.GetFlights();
+            return View(listFlights);
         }
 
         public IActionResult Privacy()
