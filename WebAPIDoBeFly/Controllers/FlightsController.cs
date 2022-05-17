@@ -88,7 +88,7 @@ namespace WebAPIDoBeFly.Controllers
         [HttpPost]
         public async Task<ActionResult<Flight>> PostFlight(FlightM flightM)
         {
-            _context.FlightSet.Add(flightM);
+            _context.FlightSet.Add(flightM.ConvertToFlightDoBeFly());
             await _context.SaveChangesAsync();
 
             return CreatedAtAction("GetFlight", new { id = flightM.FlightNo }, flightM);
