@@ -1,4 +1,4 @@
 ﻿*******************************************
 DELETE CONTENT OF THE TABLES
 *******************************************
-DROP TABLE Booking,Passenger,Pilot,Flight;
+DROP TABLE Booking,Passenger,Pilot,Flight,Employee,Person;

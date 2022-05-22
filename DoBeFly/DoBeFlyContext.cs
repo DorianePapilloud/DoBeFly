@@ -14,6 +14,7 @@ namespace DoBeFly
         public DbSet<Pilot> PilotSet { get; set; }
         public DbSet<Passenger> PassengerSet { get; set; }
         public DbSet<Booking> BookingSet { get; set; }
+
         public static readonly ILoggerFactory loggerFactory =
             LoggerFactory.Create(
             builder =>
@@ -36,7 +37,7 @@ namespace DoBeFly
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
-            builder.Entity<Booking>().HasKey(x => new { x.FlightNo, x.PassengerId });
+            builder.Entity<Booking>().HasKey(x => new { x.BookingId, x.PassengerId });
         }
 
     }

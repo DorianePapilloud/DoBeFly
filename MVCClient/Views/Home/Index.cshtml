@@ -4,11 +4,10 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
+<h1 style="color:darkblue">List of flights</h1>
+<p><br /></p>
+
 <table class="table">
     <thead>
         <tr>
@@ -16,38 +15,53 @@
                 @Html.DisplayNameFor(model => model.FlightNo)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Departure)
-            </th>
-            <th>
                 @Html.DisplayNameFor(model => model.Destination)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Date)
             </th>
-            <th></th>
+            <th>
+                @Html.DisplayNameFor(model => model.Seats)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FreeSeats)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FlightPrice)
+            </th>
+            <th>Buy Ticket</th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.FlightNo)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Departure)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Destination)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Date)
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
-            </td>
-        </tr>
-}
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FlightNo)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Destination)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Date)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Seats)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FreeSeats)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FlightPrice)
+                </td>
+                <td>
+                    @Html.ActionLink("Book this flight", "FlightDetails", new { id = item.FlightNo })
+                </td>
+            </tr>
+        }
     </tbody>
 </table>
+
+
+<p><br /></p>
+<center><img src="~/img/DoBe.jpg" width="300" /></center>

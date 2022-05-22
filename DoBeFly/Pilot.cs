@@ -10,7 +10,10 @@ namespace DoBeFly
     [Table("Pilot")]
     public class Pilot : Employee
     {
-        public int PilotId { get; set; }
+        [ForeignKey("Person")]
+        public int PersonId { get; set; }
+
+        public virtual Person Person { get; set; }
 
         public DateTime FlightHours { get; set; }
 

@@ -9,7 +9,12 @@ namespace DoBeFly
 {
     [Table("Employee")]
     public class Employee : Person
-    {  
+    {         
+        [ForeignKey("Person")]
+        public int PersonId { get; set; }
+        
+        public virtual Person Person { get; set; }
+
         public string PassportNumber { get; set; }
        
         public double Salary { get; set; }

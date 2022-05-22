@@ -11,5 +11,7 @@ namespace MVCClient.Services
 
         public Task<IEnumerable<FlightM>> GetFlights();
 
+        public Task<IEnumerable<BookingM>> GetAllBookings();
+
     }
 }

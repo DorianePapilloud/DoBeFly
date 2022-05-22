@@ -14,12 +14,9 @@ namespace MVCClient.Services
         private readonly string _baseuri;
 
         public DoBeFlyServices (HttpClient client)
-
         {
-
             _client = client;
             _baseuri = "https://localhost:44395/api/";
-
         }
 
         public async Task<IEnumerable<FlightM>> GetFlights()
@@ -29,7 +26,15 @@ namespace MVCClient.Services
             var flightList = JsonConvert.DeserializeObject<IEnumerable<FlightM>>(responseString);
 
             return flightList;
+        }
 
+        public async Task<IEnumerable<BookingM>> GetAllBookings()
+        {
+            var uri = _baseuri + "Bookings";
+            var responseString = await _client.GetStringAsync(uri);
+            var bookingList = JsonConvert.DeserializeObject<IEnumerable<BookingM>>(responseString);
+
+            return bookingList;
         }
     }
 }

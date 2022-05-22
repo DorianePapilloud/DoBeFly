@@ -32,10 +32,35 @@ namespace WebAPIDoBeFly.Controllers
             foreach (Flight f in flightList)
             {
                 var fM = f.ConvertToFlightM();
-                listFlightsMs.Add(fM);
+                fM.FlightPrice = calculatePrice(f);
+                // Only if the flight still has empty seats
+                if (fM.FreeSeats > 0)
+                    listFlightsMs.Add(fM);
             }
 
             return listFlightsMs;
+        }
+
+        private double calculatePrice(Flight f)
+        {
+            DateTime today = DateTime.Now;
+            DateTime in1Month = new DateTime(today.Year, today.Month + 1, today.Day);
+            DateTime in2Months = new DateTime(today.Year, today.Month + 2, today.Day);
+
+            //If the airplane is more than 80% full regardless of the date:.sale price = 150% of the base price
+            if (f.FreeSeats / f.Seats < 0.2)
+                return f.BasePrice * 1.5;
+
+            //If the plane is filled less than 20% less than 2 months before departure: sale price = 80% of the base price
+            else if (f.FreeSeats / f.Seats > 0.8 && f.Date < in2Months)
+                return f.BasePrice * 0.8;
+
+            //If the plane is filled less than 50% less than 1 month before departure: sale price = 70% of the base price
+            else if (f.FreeSeats / f.Seats > 0.5 && f.Date < in1Month)
+                return f.BasePrice * 0.7;
+
+            //In all other cases: sale price = base price
+            else return f.BasePrice;
         }
 
         // GET: api/Flights/5
@@ -57,7 +82,7 @@ namespace WebAPIDoBeFly.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> PutFlight(int id, Flight flight)
         {
-            if (id != flight.FlightNo)
+            if (id != flight.FlightId)
             {
                 return BadRequest();
             }
@@ -112,7 +137,7 @@ namespace WebAPIDoBeFly.Controllers
 
         private bool FlightExists(int id)
         {
-            return _context.FlightSet.Any(e => e.FlightNo == id);
+            return _context.FlightSet.Any(e => e.FlightId == id);
         }
     }
 }

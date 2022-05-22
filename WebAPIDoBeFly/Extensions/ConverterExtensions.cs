@@ -9,29 +9,53 @@ namespace WebAPIDoBeFly.Extensions
     {
 
         public static Models.FlightM ConvertToFlightM (this DoBeFly.Flight f)
-        {
-
+        { 
             Models.FlightM fM = new Models.FlightM();
-            fM.Date = f.Date;
-            fM.Departure = f.Departure;
+
+            fM.FlightNo = f.FlightId;
             fM.Destination = f.Destination;
-            fM.FlightNo = f.FlightNo;
+            fM.Date = f.Date;
+            fM.Seats = f.Seats;
+            fM.FreeSeats = f.FreeSeats;
 
             return fM;
-
         }
 
         public static DoBeFly.Flight ConvertToFlightDoBeFly (this Models.FlightM fM)
         {
-
             DoBeFly.Flight f = new DoBeFly.Flight();
-            f.Date = fM.Date;
-            f.Departure = fM.Departure;
+
+            f.FlightId = fM.FlightNo;
             f.Destination = fM.Destination;
-            f.FlightNo = fM.FlightNo;
+            f.Date = fM.Date;
+            f.Seats = f.Seats;
+            f.FreeSeats = fM.FreeSeats;
 
             return f;
+        }
 
+        public static Models.BookingM ConvertToBookingM (this DoBeFly.Booking booking)
+        {
+            Models.BookingM bookingM = new Models.BookingM();
+
+            bookingM.BookingNo = booking.BookingId;
+            bookingM.Price = booking.BookingPrice;
+            bookingM.Passenger = booking.Passenger;
+            bookingM.Flight = booking.Flight;
+
+            return bookingM;
+        }
+
+        public static DoBeFly.Booking ConvertToBookingDoBeFly (this Models.BookingM bookingM)
+        {
+            DoBeFly.Booking booking = new DoBeFly.Booking();
+
+            booking.BookingId = bookingM.BookingNo;
+            booking.BookingPrice = bookingM.Price;
+            booking.Passenger = bookingM.Passenger;
+            booking.Flight = bookingM.Flight;
+
+            return booking;
         }
 
     }

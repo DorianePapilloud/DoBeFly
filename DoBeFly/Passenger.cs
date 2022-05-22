@@ -10,8 +10,11 @@ namespace DoBeFly
     [Table("Passenger")]
     public class Passenger : Person
     {
-        public int PassengerId { get; set; }
-     
+        [ForeignKey("Person")]
+        public int PersonId { get; set; }
+
+        public virtual Person Person { get; set; }
+
         public DateTime CustomerSince { get; set; }
         
         public string Status { get; set; }
