@@ -5,9 +5,9 @@ VisualStudioVersion = 16.0.32228.343
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DoBeFly", "DoBeFly\DoBeFly.csproj", "{B448609B-2E49-4034-95EB-3BAE85FDCC05}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebAPIDoBeFly", "WebAPIDoBeFly\WebAPIDoBeFly.csproj", "{ECC81882-2681-424C-8560-D95CB5C0B36B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebAPIDoBeFly", "WebAPIDoBeFly\WebAPIDoBeFly.csproj", "{ECC81882-2681-424C-8560-D95CB5C0B36B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MVCClient", "MVCClient\MVCClient.csproj", "{43765C56-A3AF-49F2-AE65-04840258958F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MVCClient", "MVCClient\MVCClient.csproj", "{43765C56-A3AF-49F2-AE65-04840258958F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

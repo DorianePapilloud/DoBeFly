@@ -55,7 +55,7 @@
                     @Html.DisplayFor(modelItem => item.FlightPrice)
                 </td>
                 <td>
-                    @Html.ActionLink("Book this flight", "FlightDetails", new { id = item.FlightNo })
+                    @Html.ActionLink("Book this flight", "GetFlight", new { id = item.FlightNo })
                 </td>
             </tr>
         }

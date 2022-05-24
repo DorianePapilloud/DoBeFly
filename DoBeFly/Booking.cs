@@ -11,6 +11,7 @@ namespace DoBeFly
     [Table("Booking")]
     public class Booking
     {
+        [Key]
         public int BookingId { get; set; }
             
         public int PassengerId { get; set; }

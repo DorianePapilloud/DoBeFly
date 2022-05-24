@@ -40,7 +40,6 @@ namespace MVCClient.Controllers
             return null;
         }
 
-
         public IActionResult Privacy()
         {
             return View();
@@ -50,6 +49,17 @@ namespace MVCClient.Controllers
         {
             var listBooking = await _dobeFly.GetAllBookings();
             return View(listBooking);
+        }
+
+        //public async Task<IActionResult> CreateNewBooking(Booking booking)
+        //{
+        //    return View(booking);
+        //}
+
+        public async Task<IActionResult> GetFlight(int id)
+        {
+            var flight = await _dobeFly.GetFlight(id);
+            return View(flight);
         }
 
 

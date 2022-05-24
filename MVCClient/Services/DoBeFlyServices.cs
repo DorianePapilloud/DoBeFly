@@ -28,6 +28,15 @@ namespace MVCClient.Services
             return flightList;
         }
 
+        public async Task<IEnumerable<FlightM>> GetFlight(int id)
+        {
+            var uri = _baseuri + "Flights";
+            var responseString = await _client.GetStringAsync(uri);
+            var flightList = JsonConvert.DeserializeObject<IEnumerable<FlightM>>(responseString);
+
+            return flightList;
+        }
+
         public async Task<IEnumerable<BookingM>> GetAllBookings()
         {
             var uri = _baseuri + "Bookings";

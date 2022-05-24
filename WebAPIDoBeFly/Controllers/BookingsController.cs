@@ -63,6 +63,7 @@ namespace WebAPIDoBeFly.Controllers
                 return BadRequest();
             }
 
+            //_context.BookingSet.Add(booking);
             _context.Entry(booking).State = EntityState.Modified;
 
             try

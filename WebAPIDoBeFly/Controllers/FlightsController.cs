@@ -65,16 +65,17 @@ namespace WebAPIDoBeFly.Controllers
 
         // GET: api/Flights/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Flight>> GetFlight(int id)
+        public async Task<ActionResult<FlightM>> GetFlight(int id)
         {
             var flight = await _context.FlightSet.FindAsync(id);
+            var fM = flight.ConvertToFlightM();
 
             if (flight == null)
             {
                 return NotFound();
             }
 
-            return flight;
+            return fM;
         }
 
         // PUT: api/Flights/5
