@@ -52,24 +52,20 @@ namespace WebAPIDoBeFly.Controllers
                 //    {
                 //        bookingM.Destinations.Add(destination);
                 //    }
-                //}
-
-                    
+                //}                  
 
                 listBookingMs.Add(bookingM);
-            }
-                       
+            }        
 
             return listBookingMs;
             
         }
 
-
         // GET: api/Bookings/5
-        [HttpGet("{id}")]
-        public async Task<ActionResult<Booking>> GetBooking(int id)
+        [HttpGet("{idBooking}")]
+        public async Task<ActionResult<Booking>> GetBooking(int idBooking)
         {
-            var booking = await _context.BookingSet.FindAsync(id);
+            var booking = await _context.BookingSet.FindAsync(idBooking);
 
             if (booking == null)
             {
@@ -78,6 +74,36 @@ namespace WebAPIDoBeFly.Controllers
 
             return booking;
         }
+        
+        [Route("GetTotalPrice/{idFlight}")]
+        [HttpGet]
+        public int GetTotalPrice (int idFlight)
+        {
+            var list = _context.BookingSet.Where(f => f.Flight.FlightId == idFlight).ToList<Booking>();
+            var total = 0;
+
+            foreach (var booking in list)
+                total += booking.BookingPrice;
+
+            return total;
+        }
+
+        [Route("GetAveragePrice/{Destination}")]
+        [HttpGet]
+        public int GetAveragePrice(string Destination)
+        {
+            var list = _context.BookingSet.Where(f => f.Flight.Destination == Destination).ToList<Booking>();
+            var nb = list.Count;
+            var avg = 0;
+
+            foreach (var Dest in list)
+                avg += Dest.BookingPrice;
+
+            avg /= nb;
+            
+            return avg;
+        }
+
 
         // PUT: api/Bookings/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754

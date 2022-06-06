@@ -77,6 +77,22 @@ namespace WebAPIDoBeFly.Controllers
             }
         }
 
+        //// GET: api/Bookings/5
+        ////[Route("api/Flight")]
+        //[HttpGet("{idFlight}")]
+        //public async Task<ActionResult<int>> GetAveragePrice(string idFlight)
+        //{
+        //    //var booking = await _context.BookingSet.FindAsync(idFlight);
+        //    //var list = _context.BookingSet.Where(f => f.Flight.FlightId == idFlight).ToList<Booking>();
+        //    //var avg = Queryable.Average((IQueryable<int>)list.AsQueryable());
+
+        //    var nb = Int32.Parse(idFlight);
+
+        //    var flight = await _context.FlightSet.FindAsync(nb);
+
+        //    return flight.BasePrice;
+        //}
+
         // PUT: api/Flights/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]

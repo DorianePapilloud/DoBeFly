@@ -39,7 +39,7 @@ namespace MVCClient.Controllers
 
         public async Task<IActionResult> Bookings()
         {
-            var allBookings = await _dobeFly.GetAllBookings();
+            var allBookings = await _dobeFly.GetAveragePrice();
             foreach (BookingM bookingM in allBookings)
             {
                 var idFlight = bookingM.Flight.FlightId;
@@ -56,6 +56,19 @@ namespace MVCClient.Controllers
             var ticket = await _dobeFly.BuyTicket(newTicket);
             return View(ticket);
         }
+
+        public async Task<IActionResult> AveragePrice()
+        {
+            var avg = await _dobeFly.GetAveragePrice("Dublin");
+            return View(avg);
+        }
+
+        public async Task<IActionResult> TotalPrice()
+        {
+            var total = await _dobeFly.GetTotalPrice(2);
+            return View(total);
+        }
+
 
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

@@ -34,11 +34,10 @@ namespace MVCClient.Services
             var uri = _baseuri + "Flights/" + id  ;
             var responseString = await _client.GetStringAsync(uri);
             var flight = JsonConvert.DeserializeObject<FlightM>(responseString);
-
             return flight;
         }
 
-        public async Task<IEnumerable<BookingM>> GetAllBookings()
+        public async Task<IEnumerable<BookingM>> GetAveragePrice()
         {
             var uri = _baseuri + "Bookings";
             var responseString = await _client.GetStringAsync(uri);
@@ -74,6 +73,22 @@ namespace MVCClient.Services
             response.EnsureSuccessStatusCode();
             var data = await response.Content.ReadAsStringAsync();
             return JsonConvert.DeserializeObject<TicketM>(data);
+        }
+
+        public async Task<int> GetAveragePrice(string Destination)
+        {
+            var uri = _baseuri + "Bookings/GetAveragePrice/" + Destination;
+            var responseString = await _client.GetStringAsync(uri);
+            var avg = JsonConvert.DeserializeObject<int>(responseString);
+            return avg;
+        }
+
+        public async Task<int> GetTotalPrice(int idFlight)
+        {
+            var uri = _baseuri + "Bookings/GetTotalPrice/" + idFlight;
+            var responseString = await _client.GetStringAsync(uri);
+            var total = JsonConvert.DeserializeObject<int>(responseString);
+            return total;
         }
 
     }

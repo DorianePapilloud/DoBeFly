@@ -1,10 +1,16 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿@model IEnumerable<MVCClient.Models.BookingM>
+
 @{
+    ViewData["Title"] = "BuyTicket";
 }
 
-<h1>Thanks for your reservation</h1>
+<h1>
+    Thanks for your reservation 
+    @*@foreach (var item in Model)
+    {
+        @Html.DisplayFor(modelItem => item.Passenger.FirstName)
+    }*@
+</h1>
 
 <div>
     <a asp-action="Index">Back to List</a>
