@@ -21,6 +21,19 @@ namespace WebAPIDoBeFly.Extensions
             return fM;
         }
 
+
+        //public static Models.TicketM ConvertToTicketM(this DoBeFly.Booking b)
+        //{
+        //    Models.TicketM tM = new Models.TicketM();
+
+        //    tM.FlightNo = b.FlightId;
+        //    tM.FirstName = b.Passenger.FirstName;
+        //    tM.LastName = b.Passenger.LastName;
+        //    tM.SalePrice = b.BookingPrice;
+
+        //    return tM;
+        //}
+
         public static DoBeFly.Flight ConvertToFlightDoBeFly (this Models.FlightM fM)
         {
             DoBeFly.Flight f = new DoBeFly.Flight();

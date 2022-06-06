@@ -52,10 +52,10 @@
                     @Html.DisplayFor(modelItem => item.FreeSeats)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.FlightPrice)
+                    CHF @Html.DisplayFor(modelItem => item.FlightPrice).00
                 </td>
                 <td>
-                    @Html.ActionLink("Book this flight", "GetFlight", new { id = item.FlightNo })
+                    @Html.ActionLink("Details", "FlightDetails", new { id = item.FlightNo })
                 </td>
             </tr>
         }

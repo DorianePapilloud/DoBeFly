@@ -26,18 +26,44 @@ namespace WebAPIDoBeFly.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<BookingM>>> GetBookingSet()
         {
-            var bookinList = await _context.BookingSet.ToListAsync();
+            var bookingList = await _context.BookingSet.ToListAsync();
             List<BookingM> listBookingMs = new List<BookingM>();
+            List<string> destinations = new List<string>();
 
-            foreach (Booking booking in bookinList)
+            foreach (Booking booking in bookingList)
             {
                 var bookingM = booking.ConvertToBookingM();
+
+                var id = booking.FlightId;
+                bookingM.Flight = await _context.FlightSet.FindAsync(id);
+
+                var idP = booking.PassengerId;
+                bookingM.Passenger = await _context.PassengerSet.FindAsync(idP);
+
+                //var destination = bookingM.Flight.Destination;
+                //if (!destinations.Equals(destination))
+                //{
+                //    if (bookingM.Destinations.Count==0)
+                //    {
+                //        bookingM.Destinations = new List<string>();
+                //        bookingM.Destinations.Add(destination);
+                //    }
+                //    else
+                //    {
+                //        bookingM.Destinations.Add(destination);
+                //    }
+                //}
+
+                    
+
                 listBookingMs.Add(bookingM);
             }
+                       
 
             return listBookingMs;
             
         }
+
 
         // GET: api/Bookings/5
         [HttpGet("{id}")]
@@ -88,9 +114,48 @@ namespace WebAPIDoBeFly.Controllers
         // POST: api/Bookings
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<Booking>> PostBooking(Booking booking)
+        public async Task<ActionResult<Booking>> PostBooking(TicketM ticketM)
         {
+
+            //Create passenger object to insert in the database if doesn't exist
+            var passenger = new Passenger()
+            {
+                FirstName = ticketM.FirstName,
+                LastName = ticketM.LastName,
+                Email = ticketM.Email,
+                Birthday = ticketM.Birthday
+            };
+
+            //Check if passenger exists in the database
+            var passengersList = await _context.PassengerSet.ToListAsync();
+            Passenger passenger_ = passengersList.Where(p => p.Email == ticketM.Email)
+                .FirstOrDefault<Passenger>();
+            if (passenger_ == null)
+            {
+                passenger_ = new Passenger() { FirstName = ticketM.FirstName, LastName = ticketM.LastName, Email = ticketM.Email, Birthday = ticketM.Birthday };
+                _context.PassengerSet.Add(passenger_);
+                await _context.SaveChangesAsync();
+            }
+
+            passengersList = await _context.PassengerSet.ToListAsync();
+            var passengerNew_ = passengersList.Where(p => p.Email == ticketM.Email)
+                                .FirstOrDefault<Passenger>();
+
+            //Create booking object to insert in the database afterwards
+            Booking booking = new Booking();
+            booking.BookingPrice = ticketM.FlightM.FlightPrice;
+            booking.FlightId = ticketM.FlightM.FlightNo;
+            booking.PassengerId = passenger_.Person.PersonId;
+
+            //Add booking
             _context.BookingSet.Add(booking);
+
+            //Update free seats for the flight
+            var flightsList = await _context.FlightSet.ToListAsync();
+            var flightToUpdate = flightsList.Where(p => p.FlightId == ticketM.FlightM.FlightNo)
+                .FirstOrDefault<Flight>();
+            flightToUpdate.FreeSeats--;
+
             try
             {
                 await _context.SaveChangesAsync();
@@ -108,6 +173,11 @@ namespace WebAPIDoBeFly.Controllers
             }
 
             return CreatedAtAction("GetBooking", new { id = booking.BookingId }, booking);
+        }
+
+        private static void save(DoBeFlyContext _context)
+        {
+            _context.SaveChangesAsync();
         }
 
         // DELETE: api/Bookings/5

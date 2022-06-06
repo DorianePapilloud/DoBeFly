@@ -16,5 +16,7 @@ namespace WebAPIDoBeFly.Models
 
         public Flight Flight { get; set; }
 
+        public List<string> Destinations { get; set; }
+
     }
 }

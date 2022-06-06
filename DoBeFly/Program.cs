@@ -21,41 +21,43 @@ namespace DoBeFly
             Console.WriteLine("Done.");
 
             //Create pilots
-            Pilot pilot1 = new Pilot() { FirstName = "Maverick", Salary = 10000, HireDate = new DateTime(2010, 01, 01) };
-            Pilot pilot2 = new Pilot() { FirstName = "Goose", Salary = 8000, HireDate = new DateTime(2014, 07, 01) };
-            Pilot pilot3 = new Pilot() { FirstName = "Iceman", Salary = 90000, HireDate = new DateTime(2015, 09, 01) };
-            context.PilotSet.Add(pilot1);
-            context.PilotSet.Add(pilot2);
-            context.PilotSet.Add(pilot3);
+            //Pilot pilot1 = new Pilot() { FirstName = "Maverick", Salary = 10000, HireDate = new DateTime(2010, 01, 01) };
+            //Pilot pilot2 = new Pilot() { FirstName = "Goose", Salary = 8000, HireDate = new DateTime(2014, 07, 01) };
+            //Pilot pilot3 = new Pilot() { FirstName = "Iceman", Salary = 90000, HireDate = new DateTime(2015, 09, 01) };
+            //context.PilotSet.Add(pilot1);
+            //context.PilotSet.Add(pilot2);
+            //context.PilotSet.Add(pilot3);
 
 
             //Create flights
-            Flight flight1 = new Flight() { BasePrice= 450, Seats = 200, Destination = "BoraBora", FreeSeats = 10, Date = new DateTime(2022, 05, 21), PilotId = 1 };
-            Flight flight2 = new Flight() { BasePrice = 100, Seats = 100, Destination = "Dublin", FreeSeats = 10, Date = new DateTime(2022, 06, 11), PilotId = 1 };
-            Flight flight3 = new Flight() { BasePrice = 40, Seats = 100, Destination = "London", FreeSeats = 10, Date = new DateTime(2022, 06, 17), PilotId = 2 };
-            Flight flight4 = new Flight() { BasePrice = 200, Seats = 200, Destination = "Rome", FreeSeats = 10, Date = new DateTime(2022, 07, 22), PilotId = 2 };
-            Flight flight5 = new Flight() { BasePrice = 800, Seats = 300, Destination = "Tokyo", FreeSeats = 10, Date = new DateTime(2022, 07, 24), PilotId = 3 };
-            Flight flight6 = new Flight() { BasePrice = 700, Seats = 200, Destination = "Ottawa", FreeSeats = 10, Date = new DateTime(2022, 07, 02), PilotId = 3 };
-            context.FlightSet.Add(flight1);
-            context.FlightSet.Add(flight2);
-            context.FlightSet.Add(flight3);
-            context.FlightSet.Add(flight4);
-            context.FlightSet.Add(flight5);
-            context.FlightSet.Add(flight6);
+            //Flight flight1 = new Flight() { BasePrice= 450, Seats = 200, Destination = "BoraBora", FreeSeats = 10, Date = new DateTime(2022, 05, 21), PilotId = 1 };
+            //Flight flight2 = new Flight() { BasePrice = 100, Seats = 100, Destination = "Dublin", FreeSeats = 10, Date = new DateTime(2022, 06, 11), PilotId = 1 };
+            //Flight flight3 = new Flight() { BasePrice = 40, Seats = 100, Destination = "London", FreeSeats = 10, Date = new DateTime(2022, 06, 17), PilotId = 2 };
+            //Flight flight4 = new Flight() { BasePrice = 200, Seats = 200, Destination = "Rome", FreeSeats = 10, Date = new DateTime(2022, 07, 22), PilotId = 2 };
+            //Flight flight5 = new Flight() { BasePrice = 800, Seats = 300, Destination = "Tokyo", FreeSeats = 10, Date = new DateTime(2022, 07, 24), PilotId = 3 };
+            //Flight flight6 = new Flight() { BasePrice = 700, Seats = 200, Destination = "Ottawa", FreeSeats = 10, Date = new DateTime(2022, 07, 02), PilotId = 3 };
+            //context.FlightSet.Add(flight1);
+            //context.FlightSet.Add(flight2);
+            //context.FlightSet.Add(flight3);
+            //context.FlightSet.Add(flight4);
+            //context.FlightSet.Add(flight5);
+            //context.FlightSet.Add(flight6);
 
 
             //Create booking
-            Booking booking1 = new Booking();
-            booking1.Flight = flight1;
-            booking1.BookingPrice = 350;
-            booking1.Passenger = new Passenger() { LastName = "Gates", FirstName = "Bill" };
+            //Booking booking1 = new Booking();
+            //booking1.Flight = flight1;
+            //booking1.BookingPrice = 350;
+            //booking1.Passenger = new Passenger() { LastName = "Gates", FirstName = "Bill" };
 
-            Passenger passenger1 = new Passenger() { LastName = "Musk", FirstName = "Elon" };
-            Booking booking2 = new Booking() { Flight = flight2, BookingPrice = 200, Passenger = passenger1 };
+            //Passenger passenger1 = new Passenger() { LastName = "Musk", FirstName = "Elon" };
+            //Booking booking2 = new Booking() { Flight = flight2, BookingPrice = 200, Passenger = passenger1 };
+            //context.PassengerSet.Add(passenger1);
+            //context.BookingSet.Add(booking1);
+            //context.BookingSet.Add(booking2);
+
+            Passenger passenger1 = new Passenger() { LastName = "Coimbra", FirstName = "Daniel", Email = "Daniel@coimbra.ch" };
             context.PassengerSet.Add(passenger1);
-            context.BookingSet.Add(booking1);
-            context.BookingSet.Add(booking2);
-
 
             //Update pilot 
             //var pilotsList = context.PilotSet.ToList<Pilot>();

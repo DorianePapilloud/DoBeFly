@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
+using System.Text;
 using System.Threading.Tasks;
 
 namespace MVCClient.Services
@@ -28,13 +29,13 @@ namespace MVCClient.Services
             return flightList;
         }
 
-        public async Task<IEnumerable<FlightM>> GetFlight(int id)
+        public async Task<FlightM> GetFlight(int id)
         {
-            var uri = _baseuri + "Flights";
+            var uri = _baseuri + "Flights/" + id  ;
             var responseString = await _client.GetStringAsync(uri);
-            var flightList = JsonConvert.DeserializeObject<IEnumerable<FlightM>>(responseString);
+            var flight = JsonConvert.DeserializeObject<FlightM>(responseString);
 
-            return flightList;
+            return flight;
         }
 
         public async Task<IEnumerable<BookingM>> GetAllBookings()
@@ -45,5 +46,35 @@ namespace MVCClient.Services
 
             return bookingList;
         }
+
+        public async Task<IEnumerable<PassengerM>> GetAllPassengers()
+        {
+            var uri = _baseuri + "Passenger";
+            var responseString = await _client.GetStringAsync(uri);
+            var passengerList = JsonConvert.DeserializeObject<IEnumerable<PassengerM>>(responseString);
+
+            return passengerList;
+        }
+
+        public async Task<PassengerM> GetPassenger(int id)
+        {
+            var uri = _baseuri + "Passenger/" + id;
+            var responseString = await _client.GetStringAsync(uri);
+            var passenger = JsonConvert.DeserializeObject<PassengerM>(responseString);
+
+            return passenger;
+        }
+
+        public async Task<TicketM> BuyTicket(TicketM ticketM)
+        {
+            var json = JsonConvert.SerializeObject(ticketM);
+            HttpContent stringContent = new StringContent(json, Encoding.UTF8, "application/json");
+            var uri = _baseuri + "Bookings";
+            var response = await _client.PostAsync(uri, stringContent);
+            response.EnsureSuccessStatusCode();
+            var data = await response.Content.ReadAsStringAsync();
+            return JsonConvert.DeserializeObject<TicketM>(data);
+        }
+
     }
 }

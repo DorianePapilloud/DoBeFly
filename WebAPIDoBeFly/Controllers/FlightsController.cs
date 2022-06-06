@@ -41,25 +41,23 @@ namespace WebAPIDoBeFly.Controllers
             return listFlightsMs;
         }
 
-        private double calculatePrice(Flight f)
+        private int calculatePrice(Flight f)
         {
             DateTime today = DateTime.Now;
-            DateTime in1Month = new DateTime(today.Year, today.Month + 1, today.Day);
-            DateTime in2Months = new DateTime(today.Year, today.Month + 2, today.Day);
 
             //If the airplane is more than 80% full regardless of the date:.sale price = 150% of the base price
             if (f.FreeSeats / f.Seats < 0.2)
-                return f.BasePrice * 1.5;
+                return (int)(f.BasePrice * 1.5);
 
             //If the plane is filled less than 20% less than 2 months before departure: sale price = 80% of the base price
-            else if (f.FreeSeats / f.Seats > 0.8 && f.Date < in2Months)
-                return f.BasePrice * 0.8;
+            else if (f.FreeSeats / f.Seats > 0.8 && f.Date.Month < today.Month+2)
+                return (int)(f.BasePrice * 0.8);
 
             //If the plane is filled less than 50% less than 1 month before departure: sale price = 70% of the base price
-            else if (f.FreeSeats / f.Seats > 0.5 && f.Date < in1Month)
-                return f.BasePrice * 0.7;
+            else if (f.FreeSeats / f.Seats > 0.5 && f.Date.Month < today.Month+1)
+                return (int)(f.BasePrice * 0.7);
 
-            //In all other cases: sale price = base price
+            //In all other cases: sale price = base price*
             else return f.BasePrice;
         }
 
@@ -68,14 +66,15 @@ namespace WebAPIDoBeFly.Controllers
         public async Task<ActionResult<FlightM>> GetFlight(int id)
         {
             var flight = await _context.FlightSet.FindAsync(id);
-            var fM = flight.ConvertToFlightM();
-
             if (flight == null)
-            {
                 return NotFound();
-            }
 
-            return fM;
+            else
+            {
+                var fM = flight.ConvertToFlightM();
+                fM.FlightPrice = calculatePrice(flight);
+                return fM;
+            }
         }
 
         // PUT: api/Flights/5

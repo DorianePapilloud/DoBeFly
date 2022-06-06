@@ -13,15 +13,15 @@ namespace DoBeFly
     {
         [Key]
         public int BookingId { get; set; }
-            
-        public int PassengerId { get; set; }
-
-        public int FlightId { get; set; }
 
         public int BookingPrice { get; set; }
 
+        public int FlightId { get; set; }
+
         public virtual Flight Flight { get; set; }
-        
+
+        public int PassengerId { get; set; }
+
         public virtual Passenger Passenger { get; set; }
 
     }

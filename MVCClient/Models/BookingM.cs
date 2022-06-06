@@ -15,5 +15,7 @@ namespace MVCClient.Models
         public Passenger Passenger { get; set; }
 
         public Flight Flight { get; set; }
+
+        public List<string> Destinations { get; set; }
     }
 }

@@ -1,4 +1,5 @@
-﻿using MVCClient.Models;
+﻿using Microsoft.AspNetCore.Mvc;
+using MVCClient.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,9 +12,17 @@ namespace MVCClient.Services
 
         public Task<IEnumerable<FlightM>> GetFlights();
 
+        public Task<FlightM> GetFlight(int id);
+
         public Task<IEnumerable<BookingM>> GetAllBookings();
 
-        public Task<IEnumerable<FlightM>> GetFlight(int id);
+        public Task<TicketM> BuyTicket(TicketM ticketM);
+
+        public Task<IEnumerable<PassengerM>> GetAllPassengers();
+
+        public Task<PassengerM> GetPassenger(int id);
+
+
 
     }
 }

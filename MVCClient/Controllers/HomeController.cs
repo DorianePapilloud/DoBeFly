@@ -29,37 +29,32 @@ namespace MVCClient.Controllers
             return View(listFlights);
         }
 
-        public async Task<IActionResult> FlightDetails(int flightNo)
+        public async Task<IActionResult> FlightDetails(int id)
         {
-            var listFlights = await _dobeFly.GetFlights();
-            foreach (FlightM f in listFlights)
-            {
-                if (f.FlightNo == flightNo)
-                    return View(f);
-            }
-            return null;
-        }
-
-        public IActionResult Privacy()
-        {
-            return View();
+            var flight = await _dobeFly.GetFlight(id);
+            TicketM ticket = new TicketM();
+            ticket.FlightM = flight;
+            return View(ticket);
         }
 
         public async Task<IActionResult> Bookings()
         {
-            var listBooking = await _dobeFly.GetAllBookings();
-            return View(listBooking);
+            var allBookings = await _dobeFly.GetAllBookings();
+            foreach (BookingM bookingM in allBookings)
+            {
+                var idFlight = bookingM.Flight.FlightId;
+                var flight = await _dobeFly.GetFlight(idFlight);
+                bookingM.Flight.Destination = flight.Destination;
+            }
+
+            return View(allBookings);
         }
 
-        //public async Task<IActionResult> CreateNewBooking(Booking booking)
-        //{
-        //    return View(booking);
-        //}
-
-        public async Task<IActionResult> GetFlight(int id)
+        [HttpPost]
+        public async Task<IActionResult> BuyTicket (TicketM newTicket)
         {
-            var flight = await _dobeFly.GetFlight(id);
-            return View(flight);
+            var ticket = await _dobeFly.BuyTicket(newTicket);
+            return View(ticket);
         }
 
 
