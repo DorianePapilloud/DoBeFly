@@ -85,6 +85,9 @@ namespace MVCClient.Controllers
                     bookingM.Flight.Destination = flight.Destination;
                 }
 
+                List<BookingM> bookingMs = new List<BookingM>();
+                bookingMs.Select(x => x.Destinations).Distinct();
+
                 return View(allBookings);
             }
         }

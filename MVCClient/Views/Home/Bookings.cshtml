@@ -10,16 +10,22 @@
 <form method="post">
     <select name="destination">
         <option selected disabled>Choose a destination to display !</option>
-        <option>London</option>
+        @*<option>London</option>
         <option>Dublin</option>
         <option>Ottawa</option>
         <option>BoraBora</option>
         <option>Tokyo</option>
-        <option>Rome</option>
-        @*@foreach (var item in Model)
-        {
-            <option> @Html.DisplayFor(modelItem => item.Destinations)</option>
-        }*@
+        <option>Rome</option>*@
+        @{
+            List<BookingM> bookingMs = new List<BookingM>();
+            bookingMs.Select(x => x.Destinations).Distinct();
+            //foreach (var destination in bookingMs)
+            //{
+                @*<option> @Html.DisplayFor(modelItem => destination.Destinations)</option>*@
+            @*  *@}
+            @*@Html.DropDownList("bookingMs")*@
+      
+        }
     </select>
     <input type="submit" value="Search"/>
 </form>
