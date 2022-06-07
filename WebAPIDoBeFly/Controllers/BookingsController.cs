@@ -125,7 +125,15 @@ namespace WebAPIDoBeFly.Controllers
             foreach (var Dest in list)
                 avg += Dest.BookingPrice;
 
+            if(nb == 0)
+            {
+                TicketM ticket = new TicketM();
+                avg = ticket.SalePrice;
+            }
+            else
+            {
             avg /= nb;
+            }
             
             return avg;
         }

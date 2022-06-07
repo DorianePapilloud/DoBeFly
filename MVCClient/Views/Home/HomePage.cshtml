@@ -1,0 +1,69 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+
+<div class="text-center">
+    <h1 class="display-4">Welcome to DoBeFly !</h1>
+    <p></p>
+    <h2>Select an option to start : </h2>
+    <p></p>
+    <body>
+        <button class="button button" style="vertical-align:middle" onclick="@("window.location.href='" + @Url.Action("Index", "Home") + "'");"><span>Flights </span></button>
+        <button class="button button" style="vertical-align:middle" onclick="@("window.location.href='" + @Url.Action("Bookings", "Home") + "'");"><span>Bookings </span></button>
+        <p></p>
+    </body>
+</div>
+
+
+<style>
+    body {
+        background-image: url('../img/cloudImage.jpg');
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        background-size: 100% 100%;
+    }
+</style>
+
+<style>
+    .button {
+        display: inline-block;
+        border-radius: 7px;
+        background-color: skyblue;
+        border: none;
+        color: white;
+        text-align: center;
+        font-family: 'Segoe UI';
+        font-size: 35px;
+        line-height: 140px;
+        width: 180px;
+        transition: all 0.5s;
+        cursor: pointer;
+        margin: 5px;
+    }
+
+        .button span {
+            cursor: pointer;
+            display: inline-block;
+            position: relative;
+            transition: 0.5s;
+        }
+
+            .button span:after {
+                content: '\00bb';
+                position: absolute;
+                opacity: 0;
+                top: 0;
+                right: -20px;
+                transition: 0.5s;
+            }
+
+        .button:hover span {
+            padding-right: 25px;
+        }
+
+            .button:hover span:after {
+                opacity: 1;
+                right: 0;
+            }
+</style>

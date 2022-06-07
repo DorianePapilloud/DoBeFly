@@ -23,6 +23,12 @@ namespace MVCClient.Controllers
             _dobeFly = dobeFly;
         }
 
+
+        public IActionResult HomePage()
+        {
+            return View();
+        }
+
         public async Task<IActionResult> Index()
         {
             var listFlights = await _dobeFly.GetFlights();
@@ -34,6 +40,8 @@ namespace MVCClient.Controllers
             var flight = await _dobeFly.GetFlight(id);
             TicketM ticket = new TicketM();
             ticket.FlightM = flight;
+            ticket.Average = await _dobeFly.GetAveragePrice(flight.Destination);
+            ticket.TotalSalePrice = await _dobeFly.GetTotalPrice(flight.FlightNo);
             return View(ticket);
         }
 
@@ -76,6 +84,7 @@ namespace MVCClient.Controllers
                     var flight = await _dobeFly.GetFlight(idFlight);
                     bookingM.Flight.Destination = flight.Destination;
                 }
+
                 return View(allBookings);
             }
         }
@@ -87,16 +96,18 @@ namespace MVCClient.Controllers
             return View();
         }
 
-        public async Task<IActionResult> AveragePrice()
+        public async Task<IActionResult> AveragePrice(string destination)
         {
-            var avg = await _dobeFly.GetAveragePrice("Dublin");
-            return View(avg);
+            TicketM ticket = new TicketM();
+            ticket.Average = await _dobeFly.GetAveragePrice(destination);
+            return View(ticket.Average);
         }
 
-        public async Task<IActionResult> TotalPrice()
+        public async Task<IActionResult> TotalPrice(int idFlight)
         {
-            var total = await _dobeFly.GetTotalPrice(2);
-            return View(total);
+            TicketM ticket = new TicketM();
+            ticket.TotalSalePrice = await _dobeFly.GetTotalPrice(idFlight);
+            return View(ticket.TotalSalePrice);
         }
 
 

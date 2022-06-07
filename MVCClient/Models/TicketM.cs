@@ -18,6 +18,10 @@ namespace MVCClient.Models
         public string Email { get; set; }
 
         public DateTime Birthday { get; set; }
+
+        public double Average { get; set; }
+
+        public double TotalSalePrice { get; set; }
    
     }
 }

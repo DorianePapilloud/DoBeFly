@@ -5,14 +5,14 @@
 }
 
 
-<h1 style="color:darkblue">List of flights</h1>
+<h1 class="display-4" style="color:darkblue">List of flights</h1>
 <p><br /></p>
 
 <table class="table">
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.FlightNo)
+                Flight No
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Departure)
@@ -21,16 +21,16 @@
                 @Html.DisplayNameFor(model => model.Destination)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Date)
+                Date of departure
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Seats)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.FreeSeats)
+                Seats available
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.FlightPrice)
+                Price
             </th>
             <th>Buy Ticket</th>
         </tr>

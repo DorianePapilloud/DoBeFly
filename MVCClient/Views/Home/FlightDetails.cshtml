@@ -7,10 +7,10 @@
 <form asp-controller="Home" asp-action="BuyTicket">
     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
     <div>
-        <h3 style="color: white; background-color: darkblue; border-radius: 5px; padding: 10px ">Flights details</h3>
+        <h3 style="color: white; background-color: deepskyblue ; border-radius: 5px; padding: 10px ">Flights details</h3>
         <dl class="row">
             <dt class="col-sm-2">
-                @Html.DisplayNameFor(model => model.FlightM.FlightNo)
+                Flight No
             </dt>
             <dd class="col-sm-10">
                 @Html.DisplayFor(model => model.FlightM.FlightNo)
@@ -34,7 +34,7 @@
                 @Html.DisplayFor(model => model.FlightM.Seats)
             </dd>
             <dt class="col-sm-2">
-                @Html.DisplayNameFor(model => model.FlightM.FreeSeats)
+                Seats available
             </dt>
             <dd class="col-sm-10">
                 @Html.DisplayFor(model => model.FlightM.FreeSeats)
@@ -46,8 +46,12 @@
                 CHF @Html.DisplayFor(model => model.FlightM.FlightPrice).00
             </dd>
         </dl>
+        The average price for this destination is of @Model.Average.00 CHF
+        <p>
+        </p>
+        The total price for this filght number is of @Model.TotalSalePrice.00 CHF. But this does not concern you. So do not pay attention to this.
         <p><br /></p>
-        <h3 style="color: white; background-color: darkblue; border-radius: 5px; padding: 10px;">Enter your information</h3>
+        <h3 style="color: white; background-color: deepskyblue; border-radius: 5px; padding: 10px;">Enter your information</h3>
         <div class="form-group">
             <label asp-for="FirstName" class="control-label"></label>
             <input asp-for="FirstName" class="form-control" />
