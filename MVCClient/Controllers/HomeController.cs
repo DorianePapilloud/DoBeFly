@@ -53,8 +53,8 @@ namespace MVCClient.Controllers
         [HttpPost]
         public async Task<IActionResult> BuyTicket (TicketM newTicket)
         {
-            var ticket = await _dobeFly.BuyTicket(newTicket);
-            return View(ticket);
+            await _dobeFly.BuyTicket(newTicket);
+            return View();
         }
 
         public async Task<IActionResult> AveragePrice()

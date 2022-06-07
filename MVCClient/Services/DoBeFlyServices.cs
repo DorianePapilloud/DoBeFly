@@ -64,7 +64,7 @@ namespace MVCClient.Services
             return passenger;
         }
 
-        public async Task<TicketM> BuyTicket(TicketM ticketM)
+        public async Task<bool> BuyTicket(TicketM ticketM)
         {
             var json = JsonConvert.SerializeObject(ticketM);
             HttpContent stringContent = new StringContent(json, Encoding.UTF8, "application/json");
@@ -72,7 +72,7 @@ namespace MVCClient.Services
             var response = await _client.PostAsync(uri, stringContent);
             response.EnsureSuccessStatusCode();
             var data = await response.Content.ReadAsStringAsync();
-            return JsonConvert.DeserializeObject<TicketM>(data);
+            return JsonConvert.DeserializeObject<bool>(data);
         }
 
         public async Task<int> GetAveragePrice(string Destination)

@@ -58,7 +58,6 @@ namespace WebAPIDoBeFly.Controllers
             }        
 
             return listBookingMs;
-            
         }
 
         // GET: api/Bookings/5
@@ -107,40 +106,40 @@ namespace WebAPIDoBeFly.Controllers
 
         // PUT: api/Bookings/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPut("{id}")]
-        public async Task<IActionResult> PutBooking(int id, Booking booking)
-        {
-            if (id != booking.BookingId)
-            {
-                return BadRequest();
-            }
+        //[HttpPut("{id}")]
+        //public async Task<IActionResult> PutBooking(int id, Booking booking)
+        //{
+        //    if (id != booking.BookingId)
+        //    {
+        //        return BadRequest();
+        //    }
 
-            //_context.BookingSet.Add(booking);
-            _context.Entry(booking).State = EntityState.Modified;
+        //    //_context.BookingSet.Add(booking);
+        //    _context.Entry(booking).State = EntityState.Modified;
 
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!BookingExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
+        //    try
+        //    {
+        //        await _context.SaveChangesAsync();
+        //    }
+        //    catch (DbUpdateConcurrencyException)
+        //    {
+        //        if (!BookingExists(id))
+        //        {
+        //            return NotFound();
+        //        }
+        //        else
+        //        {
+        //            throw;
+        //        }
+        //    }
 
-            return NoContent();
-        }
+        //    return NoContent();
+        //}
 
         // POST: api/Bookings
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<Booking>> PostBooking(TicketM ticketM)
+        public async Task<bool> PostBooking(TicketM ticketM)
         {
 
             //Create passenger object to insert in the database if doesn't exist
@@ -190,7 +189,7 @@ namespace WebAPIDoBeFly.Controllers
             {
                 if (BookingExists(booking.BookingId))
                 {
-                    return Conflict();
+                    return false;
                 }
                 else
                 {
@@ -198,29 +197,25 @@ namespace WebAPIDoBeFly.Controllers
                 }
             }
 
-            return CreatedAtAction("GetBooking", new { id = booking.BookingId }, booking);
-        }
-
-        private static void save(DoBeFlyContext _context)
-        {
-            _context.SaveChangesAsync();
+            return true;
+            //return CreatedAtAction("BuyTicket", new { id = booking.BookingId }, booking);
         }
 
         // DELETE: api/Bookings/5
-        [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteBooking(int id)
-        {
-            var booking = await _context.BookingSet.FindAsync(id);
-            if (booking == null)
-            {
-                return NotFound();
-            }
+        //[HttpDelete("{id}")]
+        //public async Task<IActionResult> DeleteBooking(int id)
+        //{
+        //    var booking = await _context.BookingSet.FindAsync(id);
+        //    if (booking == null)
+        //    {
+        //        return NotFound();
+        //    }
 
-            _context.BookingSet.Remove(booking);
-            await _context.SaveChangesAsync();
+        //    _context.BookingSet.Remove(booking);
+        //    await _context.SaveChangesAsync();
 
-            return NoContent();
-        }
+        //    return NoContent();
+        //}
 
         private bool BookingExists(int id)
         {
