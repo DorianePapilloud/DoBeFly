@@ -13,6 +13,7 @@ namespace WebAPIDoBeFly.Extensions
             Models.FlightM fM = new Models.FlightM();
 
             fM.FlightNo = f.FlightId;
+            fM.Departure = f.Departure;
             fM.Destination = f.Destination;
             fM.Date = f.Date;
             fM.Seats = f.Seats;
@@ -21,24 +22,12 @@ namespace WebAPIDoBeFly.Extensions
             return fM;
         }
 
-
-        //public static Models.TicketM ConvertToTicketM(this DoBeFly.Booking b)
-        //{
-        //    Models.TicketM tM = new Models.TicketM();
-
-        //    tM.FlightNo = b.FlightId;
-        //    tM.FirstName = b.Passenger.FirstName;
-        //    tM.LastName = b.Passenger.LastName;
-        //    tM.SalePrice = b.BookingPrice;
-
-        //    return tM;
-        //}
-
         public static DoBeFly.Flight ConvertToFlightDoBeFly (this Models.FlightM fM)
         {
             DoBeFly.Flight f = new DoBeFly.Flight();
 
             f.FlightId = fM.FlightNo;
+            f.Departure = fM.Departure;
             f.Destination = fM.Destination;
             f.Date = fM.Date;
             f.Seats = f.Seats;

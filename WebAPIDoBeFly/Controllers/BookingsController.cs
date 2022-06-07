@@ -40,22 +40,49 @@ namespace WebAPIDoBeFly.Controllers
                 var idP = booking.PassengerId;
                 bookingM.Passenger = await _context.PassengerSet.FindAsync(idP);
 
-                //var destination = bookingM.Flight.Destination;
+                //var destination = bookingM.Flight.Destination
+                //bookingM.Destinations.Add(destination);
                 //if (!destinations.Equals(destination))
                 //{
-                //    if (bookingM.Destinations.Count==0)
+                //    if (destinations.Count == 0)
                 //    {
-                //        bookingM.Destinations = new List<string>();
-                //        bookingM.Destinations.Add(destination);
+                //        destinations = new List<string>();
+                //        destinations.Add(destination);
                 //    }
                 //    else
                 //    {
-                //        bookingM.Destinations.Add(destination);
+                //        destinations.Add(destination);
                 //    }
-                //}                  
-
+                //}
+                //bookingM.Destinations = destinations;
+                
                 listBookingMs.Add(bookingM);
             }        
+
+
+            return listBookingMs;
+        }
+
+        // GET: api/Bookings
+        [Route("GetBookingForDestination/{destination}")]
+        [HttpGet]
+        public async Task<ActionResult<IEnumerable<BookingM>>> GetBookingForDestination(string destination)
+        {
+            var bookingList = _context.BookingSet.Where(f => f.Flight.Destination == destination).ToList<Booking>();
+            List<BookingM> listBookingMs = new List<BookingM>();
+
+            foreach (Booking booking in bookingList)
+            {
+                var bookingM = booking.ConvertToBookingM();
+
+                var id = booking.FlightId;
+                bookingM.Flight = await _context.FlightSet.FindAsync(id);
+
+                var idP = booking.PassengerId;
+                bookingM.Passenger = await _context.PassengerSet.FindAsync(idP);
+
+                listBookingMs.Add(bookingM);
+            }
 
             return listBookingMs;
         }

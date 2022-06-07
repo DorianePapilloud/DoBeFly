@@ -39,7 +39,7 @@ namespace MVCClient.Controllers
 
         public async Task<IActionResult> Bookings()
         {
-            var allBookings = await _dobeFly.GetAveragePrice();
+            var allBookings = await _dobeFly.GetAllBookings();
             foreach (BookingM bookingM in allBookings)
             {
                 var idFlight = bookingM.Flight.FlightId;
@@ -47,7 +47,37 @@ namespace MVCClient.Controllers
                 bookingM.Flight.Destination = flight.Destination;
             }
 
+            allBookings = allBookings.OrderByDescending(b => b.BookingNo).ToList();
             return View(allBookings);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Bookings(string destination)
+        {
+            var test = destination;
+            if (destination == null)
+            {
+                var allBookings = await _dobeFly.GetAllBookings();
+                foreach (BookingM bookingM in allBookings)
+                {
+                    var idFlight = bookingM.Flight.FlightId;
+                    var flight = await _dobeFly.GetFlight(idFlight);
+                    bookingM.Flight.Destination = flight.Destination;
+                }
+                allBookings = allBookings.OrderByDescending(b => b.BookingNo).ToList();
+                return View(allBookings);
+            }
+            else
+            {
+                var allBookings = await _dobeFly.GetBookingForDestination(destination);
+                foreach (BookingM bookingM in allBookings)
+                {
+                    var idFlight = bookingM.Flight.FlightId;
+                    var flight = await _dobeFly.GetFlight(idFlight);
+                    bookingM.Flight.Destination = flight.Destination;
+                }
+                return View(allBookings);
+            }
         }
 
         [HttpPost]

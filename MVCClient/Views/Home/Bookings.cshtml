@@ -7,60 +7,75 @@
 <h1 style="color:darkblue">List of bookings</h1>
 <p><br /></p>
 
-<select name="destinations">
-    <option selected disabled>Choose a destination to display !</option>
-    @*@foreach (var item in Model)
-    {
-        <option> @Html.DisplayFor(modelItem => item.Destinations)</option>
-    }*@
-</select>
-
-<p><br /></p>
-
-<h4>Average price: </h4>
-<p><br /></p>
-
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.BookingNo)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Flight.Destination)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Passenger.FirstName)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Passenger.LastName)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Price)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model)
+<form method="post">
+    <select name="destination">
+        <option selected disabled>Choose a destination to display !</option>
+        <option>London</option>
+        <option>Dublin</option>
+        <option>Ottawa</option>
+        <option>BoraBora</option>
+        <option>Tokyo</option>
+        <option>Rome</option>
+        @*@foreach (var item in Model)
         {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.BookingNo)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Flight.Destination)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Passenger.FirstName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Passenger.LastName)
-            </td>
-            <td>
-                CHF @Html.DisplayFor(modelItem => item.Price).00
-            </td>
-        </tr>
-        }
-    </tbody>
-</table>
+            <option> @Html.DisplayFor(modelItem => item.Destinations)</option>
+        }*@
+    </select>
+    <input type="submit" value="Search"/>
+</form>
+
+    <p><br /></p>
+
+    <h4>Average price: </h4>
+    <p><br /></p>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.BookingNo)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Flight.Departure)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Flight.Destination)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Passenger.FirstName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Passenger.LastName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Price)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.BookingNo)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Flight.Departure)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Flight.Destination)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Passenger.FirstName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Passenger.LastName)
+                    </td>
+                    <td>
+                        CHF @Html.DisplayFor(modelItem => item.Price).00
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
