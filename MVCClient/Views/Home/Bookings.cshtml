@@ -1,4 +1,4 @@
-﻿@model IEnumerable<MVCClient.Models.BookingM>
+﻿@model MVCClient.Models.BookingMDestination
 
 @{
     ViewData["Title"] = "Bookings";
@@ -10,22 +10,12 @@
 <form method="post">
     <select name="destination">
         <option selected disabled>Choose a destination to display !</option>
-        @*<option>London</option>
-        <option>Dublin</option>
-        <option>Ottawa</option>
-        <option>BoraBora</option>
-        <option>Tokyo</option>
-        <option>Rome</option>*@
-        @{
-            List<BookingM> bookingMs = new List<BookingM>();
-            bookingMs.Select(x => x.Destinations).Distinct();
-            //foreach (var destination in bookingMs)
-            //{
-                @*<option> @Html.DisplayFor(modelItem => destination.Destinations)</option>*@
-            @*  *@}
-            @*@Html.DropDownList("bookingMs")*@
-      
-        }
+
+            @foreach (var destination in Model.listDestinations)
+            {
+                <option> @Html.DisplayFor(modelItem => destination)</option>
+                }
+            }
     </select>
     <input type="submit" value="Search"/>
 </form>
@@ -39,28 +29,28 @@
         <thead>
             <tr>
                 <th>
-                    @Html.DisplayNameFor(model => model.BookingNo)
+                    @Html.DisplayNameFor(model => Model.listBookingsM[0].BookingNo)
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.Flight.Departure)
+                    @Html.DisplayNameFor(model => Model.listBookingsM[0].Flight.Departure)
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.Flight.Destination)
+                    @Html.DisplayNameFor(model => Model.listBookingsM[0].Flight.Destination)
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.Passenger.FirstName)
+                    @Html.DisplayNameFor(model => Model.listBookingsM[0].Passenger.FirstName)
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.Passenger.LastName)
+                    @Html.DisplayNameFor(model => Model.listBookingsM[0].Passenger.LastName)
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.Price)
+                    @Html.DisplayNameFor(model => Model.listBookingsM[0].Price)
                 </th>
                 <th></th>
             </tr>
         </thead>
         <tbody>
-            @foreach (var item in Model)
+            @foreach (var item in Model.listBookingsM)
             {
                 <tr>
                     <td>

@@ -17,8 +17,6 @@ namespace MVCClient.Models
 
         public Flight Flight { get; set; }
 
-        public List<string> Destinations { get; set; }
-
         public List<SelectListItem> DestinationsDistinct { get; set; }
 
         public int SelectedDestinations { get; set; }

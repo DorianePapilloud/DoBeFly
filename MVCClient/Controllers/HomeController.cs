@@ -47,48 +47,51 @@ namespace MVCClient.Controllers
 
         public async Task<IActionResult> Bookings()
         {
-            var allBookings = await _dobeFly.GetAllBookings();
-            foreach (BookingM bookingM in allBookings)
+            var model = new BookingMDestination();
+            model.listBookingsM = (List<BookingM>)await _dobeFly.GetAllBookings();
+            model.listDestinations = await _dobeFly.GetAllDestinations();
+
+            foreach (BookingM bookingM in model.listBookingsM)
             {
                 var idFlight = bookingM.Flight.FlightId;
                 var flight = await _dobeFly.GetFlight(idFlight);
                 bookingM.Flight.Destination = flight.Destination;
             }
 
-            allBookings = allBookings.OrderByDescending(b => b.BookingNo).ToList();
-            return View(allBookings);
+            //allBookings = allBookings.OrderByDescending(b => b.BookingNo).ToList();
+            return View(model);
         }
 
         [HttpPost]
         public async Task<IActionResult> Bookings(string destination)
         {
-            var test = destination;
             if (destination == null)
             {
-                var allBookings = await _dobeFly.GetAllBookings();
-                foreach (BookingM bookingM in allBookings)
+                var model = new BookingMDestination();
+                model.listBookingsM = (List<BookingM>)await _dobeFly.GetAllBookings();
+                model.listDestinations = await _dobeFly.GetAllDestinations();
+
+                foreach (BookingM bookingM in model.listBookingsM)
                 {
                     var idFlight = bookingM.Flight.FlightId;
                     var flight = await _dobeFly.GetFlight(idFlight);
                     bookingM.Flight.Destination = flight.Destination;
                 }
-                allBookings = allBookings.OrderByDescending(b => b.BookingNo).ToList();
-                return View(allBookings);
+                return View(model);
             }
             else
             {
-                var allBookings = await _dobeFly.GetBookingForDestination(destination);
-                foreach (BookingM bookingM in allBookings)
+                var model = new BookingMDestination();
+                model.listBookingsM = (List<BookingM>)await _dobeFly.GetBookingForDestination(destination);
+                model.listDestinations = await _dobeFly.GetAllDestinations();
+
+                foreach (BookingM bookingM in model.listBookingsM)
                 {
                     var idFlight = bookingM.Flight.FlightId;
                     var flight = await _dobeFly.GetFlight(idFlight);
                     bookingM.Flight.Destination = flight.Destination;
                 }
-
-                List<BookingM> bookingMs = new List<BookingM>();
-                bookingMs.Select(x => x.Destinations).Distinct();
-
-                return View(allBookings);
+                return View(model);
             }
         }
 

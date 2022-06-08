@@ -64,6 +64,15 @@ namespace MVCClient.Services
             return passengerList;
         }
 
+        public async Task<List<string>> GetAllDestinations()
+        {
+            var uri = _baseuri + "Flights/GetAllDestinations";
+            var responseString = await _client.GetStringAsync(uri);
+            var destinations = JsonConvert.DeserializeObject<List<string>>(responseString);
+
+            return destinations;
+        }
+
         public async Task<PassengerM> GetPassenger(int id)
         {
             var uri = _baseuri + "Passenger/" + id;

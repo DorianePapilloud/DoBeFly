@@ -61,6 +61,23 @@ namespace WebAPIDoBeFly.Controllers
             else return f.BasePrice;
         }
 
+        [Route("GetAllDestinations/")]
+        [HttpGet()]
+        public async Task<ActionResult<List<string>>> GetAllDestinations()
+        {
+            var flightList = await _context.FlightSet.ToListAsync();
+            List<string> destinations = new List<string>();
+            foreach (Flight f in flightList)
+            {
+                if (!destinations.Contains(f.Destination))
+                {
+                    destinations.Add(f.Destination);
+                }
+            }
+
+            return destinations;
+        }
+
         // GET: api/Flights/5
         [HttpGet("{id}")]
         public async Task<ActionResult<FlightM>> GetFlight(int id)
@@ -126,34 +143,34 @@ namespace WebAPIDoBeFly.Controllers
 
         // POST: api/Flights
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-    //    [HttpPost]
-    //    public async Task<ActionResult<Flight>> PostFlight(FlightM flightM)
-    //    {
-    //        _context.FlightSet.Add(flightM.ConvertToFlightDoBeFly());
-    //        await _context.SaveChangesAsync();
+        //    [HttpPost]
+        //    public async Task<ActionResult<Flight>> PostFlight(FlightM flightM)
+        //    {
+        //        _context.FlightSet.Add(flightM.ConvertToFlightDoBeFly());
+        //        await _context.SaveChangesAsync();
 
-    //        return CreatedAtAction("GetFlight", new { id = flightM.FlightNo }, flightM);
-    //    }
+        //        return CreatedAtAction("GetFlight", new { id = flightM.FlightNo }, flightM);
+        //    }
 
-    //    // DELETE: api/Flights/5
-    //    [HttpDelete("{id}")]
-    //    public async Task<IActionResult> DeleteFlight(int id)
-    //    {
-    //        var flight = await _context.FlightSet.FindAsync(id);
-    //        if (flight == null)
-    //        {
-    //            return NotFound();
-    //        }
+        //    // DELETE: api/Flights/5
+        //    [HttpDelete("{id}")]
+        //    public async Task<IActionResult> DeleteFlight(int id)
+        //    {
+        //        var flight = await _context.FlightSet.FindAsync(id);
+        //        if (flight == null)
+        //        {
+        //            return NotFound();
+        //        }
 
-    //        _context.FlightSet.Remove(flight);
-    //        await _context.SaveChangesAsync();
+        //        _context.FlightSet.Remove(flight);
+        //        await _context.SaveChangesAsync();
 
-    //        return NoContent();
-    //    }
+        //        return NoContent();
+        //    }
 
-    //    private bool FlightExists(int id)
-    //    {
-    //        return _context.FlightSet.Any(e => e.FlightId == id);
-    //    }
+        //    private bool FlightExists(int id)
+        //    {
+        //        return _context.FlightSet.Any(e => e.FlightId == id);
+        //    }
     }
 }

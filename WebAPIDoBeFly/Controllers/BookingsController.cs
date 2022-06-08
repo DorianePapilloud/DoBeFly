@@ -28,7 +28,6 @@ namespace WebAPIDoBeFly.Controllers
         {
             var bookingList = await _context.BookingSet.ToListAsync();
             List<BookingM> listBookingMs = new List<BookingM>();
-            List<string> destinations = new List<string>();
 
             foreach (Booking booking in bookingList)
             {
@@ -39,26 +38,9 @@ namespace WebAPIDoBeFly.Controllers
 
                 var idP = booking.PassengerId;
                 bookingM.Passenger = await _context.PassengerSet.FindAsync(idP);
-
-                //var destination = bookingM.Flight.Destination
-                //bookingM.Destinations.Add(destination);
-                //if (!destinations.Equals(destination))
-                //{
-                //    if (destinations.Count == 0)
-                //    {
-                //        destinations = new List<string>();
-                //        destinations.Add(destination);
-                //    }
-                //    else
-                //    {
-                //        destinations.Add(destination);
-                //    }
-                //}
-                //bookingM.Destinations = destinations;
                 
                 listBookingMs.Add(bookingM);
             }        
-
 
             return listBookingMs;
         }
@@ -125,7 +107,7 @@ namespace WebAPIDoBeFly.Controllers
             foreach (var Dest in list)
                 avg += Dest.BookingPrice;
 
-            if(nb == 0)
+            if (nb == 0)
             {
                 TicketM ticket = new TicketM();
                 avg = ticket.SalePrice;

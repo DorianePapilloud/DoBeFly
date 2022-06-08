@@ -22,6 +22,8 @@ namespace MVCClient.Services
 
         public Task<IEnumerable<PassengerM>> GetAllPassengers();
 
+        public Task<List<string>> GetAllDestinations();
+
         public Task<PassengerM> GetPassenger(int id);
 
         public Task<int> GetTotalPrice(int idFlight);
