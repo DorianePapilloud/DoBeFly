@@ -1,15 +1,13 @@
-﻿@model IEnumerable<MVCClient.Models.BookingM>
+﻿@model MVCClient.Models.BookingM
 
 @{
     ViewData["Title"] = "BuyTicket";
 }
 
+<p><br /></p>
+
 <h1>
-    Thanks for your reservation 
-    @*@foreach (var item in Model)
-    {
-        @Html.DisplayFor(modelItem => item.Passenger.FirstName)
-    }*@
+    Thanks for your reservation @Model.Passenger.FirstName + " " + @Model.Passenger.
 </h1>
 
 <div>

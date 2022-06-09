@@ -11,67 +11,64 @@
     <select name="destination">
         <option selected disabled>Choose a destination to display !</option>
 
-            @foreach (var destination in Model.listDestinations)
-            {
-                <option> @Html.DisplayFor(modelItem => destination)</option>
-                }
-            }
+        @foreach (var destination in Model.listDestinations)
+        {
+            <option> @Html.DisplayFor(modelItem => destination)</option>
+        }
+        }
     </select>
-    <input type="submit" value="Search"/>
+    <input type="submit" value="Search" />
 </form>
 
-    <p><br /></p>
+<p><br /></p>
 
-    <h4>Average price: </h4>
-    <p><br /></p>
-
-    <table class="table">
-        <thead>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => Model.listBookingsM[0].BookingNo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => Model.listBookingsM[0].Flight.Departure)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => Model.listBookingsM[0].Flight.Destination)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => Model.listBookingsM[0].Passenger.FirstName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => Model.listBookingsM[0].Passenger.LastName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => Model.listBookingsM[0].Price)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.listBookingsM)
+        {
             <tr>
-                <th>
-                    @Html.DisplayNameFor(model => Model.listBookingsM[0].BookingNo)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => Model.listBookingsM[0].Flight.Departure)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => Model.listBookingsM[0].Flight.Destination)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => Model.listBookingsM[0].Passenger.FirstName)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => Model.listBookingsM[0].Passenger.LastName)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => Model.listBookingsM[0].Price)
-                </th>
-                <th></th>
+                <td>
+                    @Html.DisplayFor(modelItem => item.BookingNo)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Flight.Departure)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Flight.Destination)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Passenger.FirstName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Passenger.LastName)
+                </td>
+                <td>
+                    CHF @Html.DisplayFor(modelItem => item.Price).00
+                </td>
             </tr>
-        </thead>
-        <tbody>
-            @foreach (var item in Model.listBookingsM)
-            {
-                <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.BookingNo)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Flight.Departure)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Flight.Destination)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Passenger.FirstName)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Passenger.LastName)
-                    </td>
-                    <td>
-                        CHF @Html.DisplayFor(modelItem => item.Price).00
-                    </td>
-                </tr>
-            }
-        </tbody>
-    </table>
+        }
+    </tbody>
+</table>

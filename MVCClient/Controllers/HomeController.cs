@@ -32,6 +32,7 @@ namespace MVCClient.Controllers
         public async Task<IActionResult> Index()
         {
             var listFlights = await _dobeFly.GetFlights();
+            listFlights = listFlights.OrderBy(f => f.Date).ToList();
             return View(listFlights);
         }
 
@@ -57,42 +58,29 @@ namespace MVCClient.Controllers
                 var flight = await _dobeFly.GetFlight(idFlight);
                 bookingM.Flight.Destination = flight.Destination;
             }
-
-            //allBookings = allBookings.OrderByDescending(b => b.BookingNo).ToList();
             return View(model);
         }
 
         [HttpPost]
         public async Task<IActionResult> Bookings(string destination)
         {
+            var model = new BookingMDestination();
+            model.listDestinations = await _dobeFly.GetAllDestinations();
+
             if (destination == null)
-            {
-                var model = new BookingMDestination();
                 model.listBookingsM = (List<BookingM>)await _dobeFly.GetAllBookings();
-                model.listDestinations = await _dobeFly.GetAllDestinations();
 
-                foreach (BookingM bookingM in model.listBookingsM)
-                {
-                    var idFlight = bookingM.Flight.FlightId;
-                    var flight = await _dobeFly.GetFlight(idFlight);
-                    bookingM.Flight.Destination = flight.Destination;
-                }
-                return View(model);
-            }
             else
-            {
-                var model = new BookingMDestination();
                 model.listBookingsM = (List<BookingM>)await _dobeFly.GetBookingForDestination(destination);
-                model.listDestinations = await _dobeFly.GetAllDestinations();
-
-                foreach (BookingM bookingM in model.listBookingsM)
-                {
-                    var idFlight = bookingM.Flight.FlightId;
-                    var flight = await _dobeFly.GetFlight(idFlight);
-                    bookingM.Flight.Destination = flight.Destination;
-                }
-                return View(model);
+        
+            foreach (BookingM bookingM in model.listBookingsM)
+            {
+                var idFlight = bookingM.Flight.FlightId;
+                var flight = await _dobeFly.GetFlight(idFlight);
+                bookingM.Flight.Destination = flight.Destination;
             }
+            return View(model);
+
         }
 
         [HttpPost]
@@ -101,22 +89,6 @@ namespace MVCClient.Controllers
             await _dobeFly.BuyTicket(newTicket);
             return View();
         }
-
-        public async Task<IActionResult> AveragePrice(string destination)
-        {
-            TicketM ticket = new TicketM();
-            ticket.Average = await _dobeFly.GetAveragePrice(destination);
-            return View(ticket.Average);
-        }
-
-        public async Task<IActionResult> TotalPrice(int idFlight)
-        {
-            TicketM ticket = new TicketM();
-            ticket.TotalSalePrice = await _dobeFly.GetTotalPrice(idFlight);
-            return View(ticket.TotalSalePrice);
-        }
-
-
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
