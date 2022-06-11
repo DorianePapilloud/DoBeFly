@@ -27,7 +27,7 @@ namespace WebAPIDoBeFly.Controllers
         public async Task<ActionResult<IEnumerable<BookingM>>> GetBookingSet()
         {
             var bookingList = await _context.BookingSet.ToListAsync();
-            List<BookingM> listBookingMs = new List<BookingM>();
+            List<BookingM> listBookingMs = new();
 
             foreach (Booking booking in bookingList)
             {
@@ -51,7 +51,7 @@ namespace WebAPIDoBeFly.Controllers
         public async Task<ActionResult<IEnumerable<BookingM>>> GetBookingForDestination(string destination)
         {
             var bookingList = _context.BookingSet.Where(f => f.Flight.Destination == destination).ToList<Booking>();
-            List<BookingM> listBookingMs = new List<BookingM>();
+            List<BookingM> listBookingMs = new();
 
             foreach (Booking booking in bookingList)
             {
@@ -68,20 +68,6 @@ namespace WebAPIDoBeFly.Controllers
 
             return listBookingMs;
         }
-
-        // GET: api/Bookings/5
-        [HttpGet("{idBooking}")]
-        public async Task<ActionResult<Booking>> GetBooking(int idBooking)
-        {
-            var booking = await _context.BookingSet.FindAsync(idBooking);
-
-            if (booking == null)
-            {
-                return NotFound();
-            }
-
-            return booking;
-        }
         
         [Route("GetTotalPrice/{idFlight}")]
         [HttpGet]
@@ -91,7 +77,7 @@ namespace WebAPIDoBeFly.Controllers
             var total = 0;
 
             foreach (var booking in list)
-                total += booking.BookingPrice;
+                total = total + booking.BookingPrice;
 
             return total;
         }
@@ -113,45 +99,11 @@ namespace WebAPIDoBeFly.Controllers
                 avg = ticket.SalePrice;
             }
             else
-            {
-            avg /= nb;
-            }
+                avg /= nb;
+
             
             return avg;
         }
-
-
-        // PUT: api/Bookings/5
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        //[HttpPut("{id}")]
-        //public async Task<IActionResult> PutBooking(int id, Booking booking)
-        //{
-        //    if (id != booking.BookingId)
-        //    {
-        //        return BadRequest();
-        //    }
-
-        //    //_context.BookingSet.Add(booking);
-        //    _context.Entry(booking).State = EntityState.Modified;
-
-        //    try
-        //    {
-        //        await _context.SaveChangesAsync();
-        //    }
-        //    catch (DbUpdateConcurrencyException)
-        //    {
-        //        if (!BookingExists(id))
-        //        {
-        //            return NotFound();
-        //        }
-        //        else
-        //        {
-        //            throw;
-        //        }
-        //    }
-
-        //    return NoContent();
-        //}
 
         // POST: api/Bookings
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
@@ -213,24 +165,66 @@ namespace WebAPIDoBeFly.Controllers
                     throw;
                 }
             }
-
             return true;
-            //return CreatedAtAction("BuyTicket", new { id = booking.BookingId }, booking);
         }
 
-        // DELETE: api/Bookings/5
-        //[HttpDelete("{id}")]
-        //public async Task<IActionResult> DeleteBooking(int id)
+
+        //DELETE: api/Bookings/5
+        [Route("DeleteBooking/{idBooking}")]
+        [HttpDelete]
+        public async Task<bool> DeleteBooking(int idBooking)
+        {
+            var booking = await _context.BookingSet.FindAsync(idBooking);
+
+            if (booking == null)
+                return false;
+
+            _context.BookingSet.Remove(booking);
+            await _context.SaveChangesAsync();
+
+            return true;
+        }
+
+        // GET: api/Bookings/5
+        //[HttpGet("{idBooking}")]
+        //public async Task<ActionResult<Booking>> GetBooking(int idBooking)
         //{
-        //    var booking = await _context.BookingSet.FindAsync(id);
+        //    var booking = await _context.BookingSet.FindAsync(idBooking);
+
         //    if (booking == null)
-        //    {
         //        return NotFound();
+
+        //    return booking;
+        //}
+
+        // PUT: api/Bookings/5
+        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        //[HttpPut("{id}")]
+        //public async Task<IActionResult> PutBooking(int id, Booking booking)
+        //{
+        //    if (id != booking.BookingId)
+        //    {
+        //        return BadRequest();
         //    }
 
-        //    _context.BookingSet.Remove(booking);
-        //    await _context.SaveChangesAsync();
+        //    //_context.BookingSet.Add(booking);
+        //    _context.Entry(booking).State = EntityState.Modified;
 
+        //    try
+        //    {
+        //        await _context.SaveChangesAsync();
+        //    }
+        //    catch (DbUpdateConcurrencyException)
+        //    {
+        //        if (!BookingExists(id))
+        //        {
+        //            return NotFound();
+        //        }
+        //        else
+        //        {
+        //            throw;
+        //        }
+        //    }
         //    return NoContent();
         //}
 

@@ -27,55 +27,40 @@ namespace WebAPIDoBeFly.Controllers
         public async Task<ActionResult<IEnumerable<FlightM>>> GetFlightSet()
         {
             var flightList = await _context.FlightSet.ToListAsync();
-            List<FlightM> listFlightsMs = new List<FlightM>();
+            List<FlightM> listFlightsMs = new();
 
             foreach (Flight f in flightList)
             {
-                var fM = f.ConvertToFlightM();
-                fM.FlightPrice = calculatePrice(f);
-                // Only if the flight still has empty seats
-                if (fM.FreeSeats > 0)
+                // Only if the flight still has empty seats and after now
+                if (f.FreeSeats > 0 && f.Date.CompareTo(DateTime.Now) > 0)
+                {
+                    var fM = f.ConvertToFlightM();
+                    fM.FlightPrice = CalculatePrice(f);
                     listFlightsMs.Add(fM);
+                }
             }
-
             return listFlightsMs;
         }
 
-        private int calculatePrice(Flight f)
+        private static int CalculatePrice(Flight f)
         {
             DateTime today = DateTime.Now;
+            var fillingRate = ((double) f.FreeSeats / (double) f.Seats * 100);
 
-            //If the airplane is more than 80% full regardless of the date:.sale price = 150% of the base price
-            if (f.FreeSeats / f.Seats < 0.2)
+            //If the airplane is more than 80% full regardless of the date: sale price = 150% of the base price
+            if (fillingRate < 80)
                 return (int)(f.BasePrice * 1.5);
 
-            //If the plane is filled less than 20% less than 2 months before departure: sale price = 80% of the base price
-            else if (f.FreeSeats / f.Seats > 0.8 && f.Date.Month < today.Month+2)
-                return (int)(f.BasePrice * 0.8);
-
             //If the plane is filled less than 50% less than 1 month before departure: sale price = 70% of the base price
-            else if (f.FreeSeats / f.Seats > 0.5 && f.Date.Month < today.Month+1)
+            else if (fillingRate > 50 && f.Date.Month < today.Month + 1)
                 return (int)(f.BasePrice * 0.7);
+
+            //If the plane is filled less than 20% less than 2 months before departure: sale price = 80% of the base price
+            else if (fillingRate > 20 && f.Date.Month < today.Month + 2)
+                return (int)(f.BasePrice * 0.8);
 
             //In all other cases: sale price = base price*
             else return f.BasePrice;
-        }
-
-        [Route("GetAllDestinations/")]
-        [HttpGet()]
-        public async Task<ActionResult<List<string>>> GetAllDestinations()
-        {
-            var flightList = await _context.FlightSet.ToListAsync();
-            List<string> destinations = new List<string>();
-            foreach (Flight f in flightList)
-            {
-                if (!destinations.Contains(f.Destination))
-                {
-                    destinations.Add(f.Destination);
-                }
-            }
-
-            return destinations;
         }
 
         // GET: api/Flights/5
@@ -83,15 +68,25 @@ namespace WebAPIDoBeFly.Controllers
         public async Task<ActionResult<FlightM>> GetFlight(int id)
         {
             var flight = await _context.FlightSet.FindAsync(id);
+
             if (flight == null)
                 return NotFound();
 
             else
             {
                 var fM = flight.ConvertToFlightM();
-                fM.FlightPrice = calculatePrice(flight);
+                fM.FlightPrice = CalculatePrice(flight);
                 return fM;
             }
+        }
+
+        [Route("GetAllDestinations/")]
+        [HttpGet()]
+        public async Task<ActionResult<List<string>>> GetAllDestinations()
+        {
+            var flightList = await _context.FlightSet.ToListAsync();
+            List<string> destinations = flightList.Select(d => d.Destination).Distinct().ToList();
+            return destinations;
         }
 
         // GET: api/Bookings/5

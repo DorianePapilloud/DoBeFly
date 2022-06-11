@@ -30,12 +30,12 @@ namespace DoBeFly
 
 
             //Create flights
-            //Flight flight1 = new Flight() { BasePrice= 450, Seats = 200, Destination = "BoraBora", FreeSeats = 10, Date = new DateTime(2022, 05, 21), PilotId = 1 };
-            //Flight flight2 = new Flight() { BasePrice = 100, Seats = 100, Destination = "Dublin", FreeSeats = 10, Date = new DateTime(2022, 06, 11), PilotId = 1 };
-            //Flight flight3 = new Flight() { BasePrice = 40, Seats = 100, Destination = "London", FreeSeats = 10, Date = new DateTime(2022, 06, 17), PilotId = 2 };
-            //Flight flight4 = new Flight() { BasePrice = 200, Seats = 200, Destination = "Rome", FreeSeats = 10, Date = new DateTime(2022, 07, 22), PilotId = 2 };
-            //Flight flight5 = new Flight() { BasePrice = 800, Seats = 300, Destination = "Tokyo", FreeSeats = 10, Date = new DateTime(2022, 07, 24), PilotId = 3 };
-            //Flight flight6 = new Flight() { BasePrice = 700, Seats = 200, Destination = "Ottawa", FreeSeats = 10, Date = new DateTime(2022, 07, 02), PilotId = 3 };
+            //Flight flight1 = new() { BasePrice = 1000, Seats = 100, Departure = "Geneva", Destination = "Tokyo", FreeSeats = 100, Date = new DateTime(2022, 06, 20, 12, 30, 0), PilotId = 1 };
+            //Flight flight2 = new() { BasePrice = 1000, Seats = 100, Departure = "Geneva", Destination = "Tokyo", FreeSeats = 10, Date = new DateTime(2022, 06, 20, 12, 30, 0), PilotId = 1 };
+            //Flight flight3 = new() { BasePrice = 1000, Seats = 100, Departure = "Geneva", Destination = "Tokyo", FreeSeats = 10, Date = new DateTime(2022, 10, 20, 12, 30, 0), PilotId = 1 };
+            //Flight flight4 = new() { BasePrice = 1000, Seats = 100, Departure = "Geneva", Destination = "Tokyo", FreeSeats = 90, Date = new DateTime(2022, 07, 20, 12, 30, 0), PilotId = 1 };
+            //Flight flight5 = new() { BasePrice = 1000, Seats = 100, Departure = "Geneva", Destination = "Tokyo", FreeSeats = 90, Date = new DateTime(2022, 06, 25, 12, 30, 0), PilotId = 1 };
+            //Flight flight6 = new() { BasePrice = 1000, Seats = 100, Departure = "Geneva", Destination = "Tokyo", FreeSeats = 90, Date = new DateTime(2022, 09, 25, 12, 30, 0), PilotId = 1 };
             //context.FlightSet.Add(flight1);
             //context.FlightSet.Add(flight2);
             //context.FlightSet.Add(flight3);

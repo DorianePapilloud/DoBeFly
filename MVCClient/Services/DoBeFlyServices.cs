@@ -20,6 +20,7 @@ namespace MVCClient.Services
             _baseuri = "https://localhost:44395/api/";
         }
 
+        //From flights controller
         public async Task<IEnumerable<FlightM>> GetFlights()
         {
             var uri = _baseuri + "Flights";
@@ -37,6 +38,8 @@ namespace MVCClient.Services
             return flight;
         }
 
+
+        //From Bookings controller
         public async Task<IEnumerable<BookingM>> GetAllBookings()
         {
             var uri = _baseuri + "Bookings";
@@ -55,15 +58,6 @@ namespace MVCClient.Services
             return bookingList;
         }
 
-        public async Task<IEnumerable<PassengerM>> GetAllPassengers()
-        {
-            var uri = _baseuri + "Passenger";
-            var responseString = await _client.GetStringAsync(uri);
-            var passengerList = JsonConvert.DeserializeObject<IEnumerable<PassengerM>>(responseString);
-
-            return passengerList;
-        }
-
         public async Task<List<string>> GetAllDestinations()
         {
             var uri = _baseuri + "Flights/GetAllDestinations";
@@ -71,15 +65,6 @@ namespace MVCClient.Services
             var destinations = JsonConvert.DeserializeObject<List<string>>(responseString);
 
             return destinations;
-        }
-
-        public async Task<PassengerM> GetPassenger(int id)
-        {
-            var uri = _baseuri + "Passenger/" + id;
-            var responseString = await _client.GetStringAsync(uri);
-            var passenger = JsonConvert.DeserializeObject<PassengerM>(responseString);
-
-            return passenger;
         }
 
         public async Task<bool> BuyTicket(TicketM ticketM)
@@ -107,6 +92,13 @@ namespace MVCClient.Services
             var responseString = await _client.GetStringAsync(uri);
             var total = JsonConvert.DeserializeObject<int>(responseString);
             return total;
+        }
+
+        public async Task<bool> DeleteBooking(int idBooking)
+        {
+            var uri = _baseuri + "Bookings/DeleteBooking/" + idBooking;
+            var responseString = await _client.DeleteAsync(uri);
+            return true;
         }
 
     }
