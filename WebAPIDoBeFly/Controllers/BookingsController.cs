@@ -180,8 +180,25 @@ namespace WebAPIDoBeFly.Controllers
                 return false;
 
             _context.BookingSet.Remove(booking);
-            await _context.SaveChangesAsync();
 
+            var flight = await _context.FlightSet.FindAsync(booking.FlightId);
+            flight.FreeSeats++;
+
+            try
+            {
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateException)
+            {
+                if (BookingExists(booking.BookingId))
+                {
+                    return false;
+                }
+                else
+                {
+                    throw;
+                }
+            }
             return true;
         }
 
