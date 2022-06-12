@@ -1,0 +1,95 @@
+﻿@model MVCClient.Models.TicketM
+
+@{
+    ViewData["Title"] = "FlightDetails";
+}
+<p><br /></p>
+<form asp-controller="Home" asp-action="BuyTicket">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <div>
+        <h3 style="color: white; background-color: deepskyblue ; border-radius: 5px; padding: 10px ">Flights details</h3>
+        <dl class="row">
+            <dt class="col-sm-2">
+                Flight No
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.FlightM.FlightNo)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.FlightM.Destination)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.FlightM.Destination)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.FlightM.Date)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.FlightM.Date)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.FlightM.Seats)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.FlightM.Seats)
+            </dd>
+            <dt class="col-sm-2">
+                Seats available
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.FlightM.FreeSeats)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.FlightM.FlightPrice)
+            </dt>
+            <dd class="col-sm-10">
+                CHF @Html.DisplayFor(model => model.FlightM.FlightPrice).00
+            </dd>
+        </dl>
+        <div style="border: 5px solid lightblue; border-radius: 10px; padding:15px;">
+            <b>The average price for this destination is of CHF @Model.Average.00</b>
+            <p>
+            </p>
+            <b>The total price for this filght number is of CHF @Model.TotalSalePrice.00. @*But this does not concern you. So do not pay attention to this.*@</b>
+        </div>
+            <p><br /></p>
+        <h3 style="color: white; background-color: deepskyblue; border-radius: 5px; padding: 10px;">Enter your information</h3>
+        <div class="form-group">
+            <label asp-for="FirstName" class="control-label"></label>
+            <input asp-for="FirstName" class="form-control" required/>
+            <span asp-validation-for="FirstName" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="LastName" class="control-label"></label>
+            <input asp-for="LastName" class="form-control" required/>
+            <span asp-validation-for="LastName" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Email" class="control-label"></label>
+            <input asp-for="Email" class="form-control" required/>
+            <span asp-validation-for="Email" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Birthday" class="control-label"></label>
+            <input asp-for="Birthday" class="form-control" required/>
+            <span asp-validation-for="Birthday" class="text-danger"></span>
+        </div>
+        <div>
+            <dd class="col-sm-10">
+                @Html.HiddenFor(model => Model.FlightM.FlightNo)
+                @Html.HiddenFor(model => Model.FlightM.FlightPrice)
+            </dd>
+        </div>
+        <div class="form-group">
+            <input type="submit" value="Buy ticket" class="btn btn-primary" />
+        </div>
+    </div>
+</form>
+<p><br /></p>
+@*<div>
+            @Html.ActionLink("Buy ticket", "TestBuy", new { id = Model.FlightM.FlightNo })
+    </div>*@
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+<p><br /></p>

@@ -1,0 +1,89 @@
+﻿@model MVCClient.Models.BookingMDestination
+
+@{
+    ViewData["Title"] = "Bookings";
+}
+
+<h1 style="color: white; background-color: deepskyblue ; border-radius: 5px; padding: 10px ">List of bookings</h1>
+<p><br /></p>
+
+<form method="post">
+    <select name="destination">
+        <option selected disabled>Choose a destination to display !</option>
+
+        @foreach (var destination in Model.listDestinations)
+        {
+            <option> @Html.DisplayFor(modelItem => destination)</option>
+        }
+        }
+    </select>
+    <input type="submit" value="Search" />
+</form>
+
+<p><br /></p>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => Model.listBookingsM[0].BookingNo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => Model.listBookingsM[0].Flight.Date)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => Model.listBookingsM[0].Flight.Departure)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => Model.listBookingsM[0].Flight.Destination)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => Model.listBookingsM[0].Passenger.FirstName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => Model.listBookingsM[0].Passenger.LastName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => Model.listBookingsM[0].Price)
+            </th>
+            <th>
+                @Html.DisplayName("Cancel")
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.listBookingsM)
+        {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.BookingNo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Flight.Date)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Flight.Departure)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Flight.Destination)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Passenger.FirstName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Passenger.LastName)
+            </td>
+            <td>
+                CHF @Html.DisplayFor(modelItem => item.Price).00
+            </td>
+            <td>
+                @if (item.Flight.Date.Month.CompareTo(DateTime.Now.Month) > 0)
+                {
+                    @Html.ActionLink("Cancel", "DeleteBooking", new { id = item.BookingNo })
+                }
+            </td>
+        </tr>
+        }
+    </tbody>
+</table>

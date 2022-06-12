@@ -1,0 +1,72 @@
+﻿@model IEnumerable<MVCClient.Models.FlightM>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1 style="color: white; background-color: deepskyblue ; border-radius: 5px; padding: 10px ">List of flights</h1>
+<p><br /></p>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Flight No
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Departure)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Destination)
+            </th>
+            <th>
+                Date of departure
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Seats)
+            </th>
+            <th>
+                Seats available
+            </th>
+            <th>
+                Price
+            </th>
+            <th>Buy Ticket</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.FlightNo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Departure)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Destination)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Date)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Seats)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FreeSeats)
+            </td>
+            <td>
+                CHF @Html.DisplayFor(modelItem => item.FlightPrice).00
+            </td>
+            <td>
+                @Html.ActionLink("Details", "FlightDetails", new { id = item.FlightNo })
+            </td>
+        </tr>
+        }
+    </tbody>
+</table>
+
+
+<p><br /></p>
+<center><img src="~/img/DoBe.jpg" width="300" /></center>

@@ -3,7 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.32228.343
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DoBeFly", "DoBeFly\DoBeFly.csproj", "{B448609B-2E49-4034-95EB-3BAE85FDCC05}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DoBeFly", "DoBeFly\DoBeFly.csproj", "{B448609B-2E49-4034-95EB-3BAE85FDCC05}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebAPIDoBeFly", "WebAPIDoBeFly\WebAPIDoBeFly.csproj", "{ECC81882-2681-424C-8560-D95CB5C0B36B}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MVCClient", "MVCClient\MVCClient.csproj", "{43765C56-A3AF-49F2-AE65-04840258958F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +19,14 @@ Global
 		{B448609B-2E49-4034-95EB-3BAE85FDCC05}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B448609B-2E49-4034-95EB-3BAE85FDCC05}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B448609B-2E49-4034-95EB-3BAE85FDCC05}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ECC81882-2681-424C-8560-D95CB5C0B36B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ECC81882-2681-424C-8560-D95CB5C0B36B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ECC81882-2681-424C-8560-D95CB5C0B36B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ECC81882-2681-424C-8560-D95CB5C0B36B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{43765C56-A3AF-49F2-AE65-04840258958F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{43765C56-A3AF-49F2-AE65-04840258958F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{43765C56-A3AF-49F2-AE65-04840258958F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{43765C56-A3AF-49F2-AE65-04840258958F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
